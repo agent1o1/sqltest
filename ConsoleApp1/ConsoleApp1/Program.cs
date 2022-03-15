@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,6 +30,16 @@ namespace ConsoleApp1
                 select new { value = first + 1 };
 
             Console.WriteLine(result1.FirstOrDefault()?.value);
+
+            //less memory usage
+            var result3 = array.Aggregate((acc, val) =>
+            {
+                if (val == Int32.MaxValue || acc + 1 != val)
+                    return acc;
+                return acc + 1;
+            }) + 1;
+
+            Console.WriteLine(result3);
         }
     }
 }
